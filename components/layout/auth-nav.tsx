@@ -15,8 +15,11 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 export function AuthNav() {
-  const { user, isAdmin, loading, signOut } = useAuth()
+  const { user, loading, signOut } = useAuth()
   const router = useRouter()
+  
+  // TODO: Implement admin role checking logic
+  const isAdmin = false
 
   const handleSignOut = async () => {
     try {

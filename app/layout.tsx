@@ -11,6 +11,7 @@ import { Analytics } from "@vercel/analytics/react"
 import AnimationInitializer from "@/components/animation-initializer"
 import BusinessSchema from "@/components/structured-data/business-schema"
 import { AuthStatus } from '@/components/auth-status'
+import { FirebaseAuthProvider } from '@/components/providers/firebase-auth-provider'
 
 const inter = Inter({ subsets: ["latin"] })
 
