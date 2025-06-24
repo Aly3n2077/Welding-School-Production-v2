@@ -70,7 +70,7 @@
 
 @layer components {
   .btn-primary {
-    @apply px-8 py-4 bg-gradient-to-r from-welding-orange to-yellow-500 text-white font-bold rounded-full hover:from-welding-orange hover:to-yellow-400 transition-all duration-300 shadow-xl hover:shadow-2xl inline-flex items-center transform hover:scale-110 hover:-translate-y-1 border border-white/20;
+    @apply px-8 py-4 bg-gradient-to-r from-welding-orange to-yellow-500 text-white font-bold rounded-full hover:from-orange-600 hover:to-yellow-400 transition-all duration-300 shadow-xl hover:shadow-2xl inline-flex items-center transform hover:scale-105 hover:-translate-y-1 border border-white/20;
   }
 
   .btn-secondary {

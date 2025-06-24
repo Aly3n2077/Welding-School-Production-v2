@@ -59,28 +59,28 @@ const HeroSection = () => {
             </p>
           </ScrollAnimation>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 px-6 sm:px-8 md:px-0 mt-12 mb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 px-4 sm:px-6 md:px-8 lg:px-0 mt-8 mb-16">
             <ScrollAnimation type="fade-up" delay={0.6} duration={0.7}>
-              <Link href="/admissions" className="group relative overflow-hidden px-10 py-5 sm:px-12 sm:py-6 bg-gradient-to-r from-welding-orange to-yellow-500 text-white font-bold text-lg sm:text-xl rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 w-full sm:w-auto text-center border-2 border-white/30 min-w-[280px] sm:min-w-[300px] max-w-[350px]">
+              <Link href="/admissions" className="group relative overflow-hidden px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-welding-orange to-yellow-500 text-white font-bold text-base sm:text-lg rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 w-full sm:w-auto text-center border-2 border-white/30 min-w-[250px] sm:min-w-[280px] max-w-[320px]">
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-orange-600 to-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
                 <span className="relative flex items-center justify-center whitespace-nowrap z-10">
                   Enroll Now
                   <ArrowRight
-                    size={22}
-                    className="ml-3 inline-block transition-transform duration-300 group-hover:translate-x-2"
+                    size={20}
+                    className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-2"
                   />
                 </span>
               </Link>
             </ScrollAnimation>
 
             <ScrollAnimation type="fade-up" delay={0.7} duration={0.7}>
-              <Link href="/courses" className="group relative overflow-hidden px-10 py-5 sm:px-12 sm:py-6 bg-white/10 border-2 border-white text-white font-bold text-lg sm:text-xl rounded-full transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 w-full sm:w-auto text-center shadow-xl min-w-[280px] sm:min-w-[300px] max-w-[350px] hover:border-white hover:bg-white hover:text-steel-blue backdrop-blur-md">
+              <Link href="/courses" className="group relative overflow-hidden px-8 py-4 sm:px-10 sm:py-5 bg-white/10 border-2 border-white text-white font-bold text-base sm:text-lg rounded-full transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 w-full sm:w-auto text-center shadow-xl min-w-[250px] sm:min-w-[280px] max-w-[320px] hover:border-white hover:bg-white hover:text-steel-blue backdrop-blur-md">
                 <span className="absolute inset-0 w-full h-full bg-white rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
                 <span className="relative flex items-center justify-center whitespace-nowrap z-10 transition-colors duration-300 group-hover:text-steel-blue">
                   Explore Programs
                   <ArrowRight
-                    size={22}
-                    className="ml-3 inline-block transition-all duration-300 group-hover:translate-x-2 group-hover:text-steel-blue"
+                    size={20}
+                    className="ml-2 inline-block transition-all duration-300 group-hover:translate-x-2 group-hover:text-steel-blue"
                   />
                 </span>
               </Link>
