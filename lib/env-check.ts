@@ -1,4 +1,3 @@
-
 // Environment validation utilities
 
 export function validateFirebaseConfig(): {

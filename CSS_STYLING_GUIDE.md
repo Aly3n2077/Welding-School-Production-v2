@@ -1,4 +1,3 @@
-
 # CSS Styling Guide - MRONCY School of Welding
 
 ## Overview
@@ -7,13 +6,13 @@ This document outlines the CSS architecture, styling conventions, and best pract
 ## Color System
 
 ### Primary Colors
-```css
+\`\`\`css
 :root {
   --steel-blue: #36454f;      /* Primary brand color */
   --welding-orange: #ff6600;  /* Accent/CTA color */
   --light-grey: #f4f4f4;      /* Background color */
 }
-```
+\`\`\`
 
 ### Usage Guidelines
 - **Steel Blue**: Headers, navigation, text emphasis
@@ -23,7 +22,7 @@ This document outlines the CSS architecture, styling conventions, and best pract
 ## Button System
 
 ### Primary Button (.btn-primary)
-```css
+\`\`\`css
 .btn-primary {
   @apply px-8 py-4 bg-gradient-to-r from-welding-orange to-yellow-500 
          text-white font-bold rounded-full hover:from-orange-600 
@@ -31,17 +30,17 @@ This document outlines the CSS architecture, styling conventions, and best pract
          hover:shadow-2xl inline-flex items-center transform 
          hover:scale-105 hover:-translate-y-1 border border-white/20;
 }
-```
+\`\`\`
 
 ### Secondary Button (.btn-secondary)
-```css
+\`\`\`css
 .btn-secondary {
   @apply px-8 py-4 bg-transparent border-2 border-white text-white 
          font-bold rounded-full hover:bg-white hover:text-steel-blue 
          transition-all duration-300 shadow-xl hover:shadow-2xl 
          inline-flex items-center transform hover:scale-110 hover:-translate-y-1;
 }
-```
+\`\`\`
 
 ## Responsive Design
 
@@ -54,7 +53,7 @@ This document outlines the CSS architecture, styling conventions, and best pract
 ### Mobile-First Approach
 All styles are written mobile-first, then enhanced for larger screens:
 
-```css
+\`\`\`css
 /* Mobile base styles */
 .hero-title {
   @apply text-4xl;
@@ -73,7 +72,7 @@ All styles are written mobile-first, then enhanced for larger screens:
     @apply text-8xl;
   }
 }
-```
+\`\`\`
 
 ## Animation System
 
@@ -83,7 +82,7 @@ All styles are written mobile-first, then enhanced for larger screens:
 - Use `will-change` property sparingly and remove after animation
 
 ### Custom Animations
-```css
+\`\`\`css
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -93,7 +92,7 @@ All styles are written mobile-first, then enhanced for larger screens:
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
-```
+\`\`\`
 
 ## Component-Specific Styles
 
@@ -115,11 +114,11 @@ All styles are written mobile-first, then enhanced for larger screens:
 ## Accessibility
 
 ### Focus States
-```css
+\`\`\`css
 :focus-visible {
   @apply outline-welding-orange outline-2 outline-offset-2 rounded-sm;
 }
-```
+\`\`\`
 
 ### Color Contrast
 - Minimum 4.5:1 ratio for normal text
@@ -127,7 +126,7 @@ All styles are written mobile-first, then enhanced for larger screens:
 - Test with tools like WebAIM Color Contrast Checker
 
 ### Reduced Motion
-```css
+\`\`\`css
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
@@ -138,7 +137,7 @@ All styles are written mobile-first, then enhanced for larger screens:
     scroll-behavior: auto !important;
   }
 }
-```
+\`\`\`
 
 ## Best Practices
 
@@ -164,7 +163,7 @@ All styles are written mobile-first, then enhanced for larger screens:
 
 ### Issue: Button appears cut off on mobile
 **Solution**: Ensure proper flex container and min-width values
-```css
+\`\`\`css
 .button-container {
   @apply flex flex-col sm:flex-row gap-4 px-4;
 }
@@ -172,13 +171,13 @@ All styles are written mobile-first, then enhanced for larger screens:
 .button {
   @apply min-w-[200px] w-full sm:w-auto;
 }
-```
+\`\`\`
 
 ### Issue: Invalid Tailwind class errors
 **Solution**: Check for custom color modifiers and define them properly
-```css
+\`\`\`css
 /* Instead of: hover:from-welding-orange/90 */
 /* Use: hover:from-orange-600 */
-```
+\`\`\`
 
 This guide should be updated as the CSS architecture evolves.

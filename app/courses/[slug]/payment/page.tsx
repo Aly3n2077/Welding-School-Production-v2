@@ -1,7 +1,7 @@
 The code has been updated to reflect the new pricing structure by changing the payment amounts to use course.monthlyPrice instead of course.price.
-```
+\`\`\`
 
-```replit_final_file
+\`\`\`replit_final_file
 "use client"
 
 import { useState } from "react"
