@@ -20,6 +20,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, displayName?: string) => Promise<void>
   logout: () => Promise<void>
   resetPassword: (email: string) => Promise<void>
+  resetPassword: (email: string) => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -30,17 +31,15 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
   const [isConfigured] = useState(!!auth)
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(
-      async (user) => {
-        if (user) {
-          setUser(user)
-        } else {
-          setUser(null)
-        }
+    if (!auth) {
+      setLoading(false)
+      return
+    }
 
-        setLoading(false)
-      }
-    )
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user)
+      setLoading(false)
+    })
 
     return () => unsubscribe()
   }, [])

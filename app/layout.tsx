@@ -67,7 +67,7 @@ export default function RootLayout({
       <head>
         <BusinessSchema />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <FirebaseAuthProvider>
             <div className="flex flex-col min-h-screen">
