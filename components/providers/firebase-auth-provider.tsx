@@ -1,88 +1,110 @@
 "use client"
 
-import React, { createContext, useContext, useEffect, useState } from "react"
-import { User, onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth"
+import { createContext, useContext, useEffect, useState } from "react"
+import { 
+  User,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+  updateProfile
+} from "firebase/auth"
 import { auth } from "@/lib/firebase"
 
 interface AuthContextType {
   user: User | null
   loading: boolean
-  signOut: () => Promise<void>
-  isConfigured: boolean
+  signIn: (email: string, password: string) => Promise<void>
+  signUp: (email: string, password: string, displayName?: string) => Promise<void>
+  logout: () => Promise<void>
+  resetPassword: (email: string) => Promise<void>
 }
 
-const AuthContext = createContext<AuthContextType>({
-  user: null,
-  loading: true,
-  signOut: async () => {},
-  isConfigured: false
-})
+const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-export const useAuth = () => {
-  const context = useContext(AuthContext)
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider")
-  }
-  return context
-}
-
-interface AuthProviderProps {
-  children: React.ReactNode
-}
-
-export function FirebaseAuthProvider({ children }: AuthProviderProps) {
+export function FirebaseAuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
-  const [isConfigured, setIsConfigured] = useState(false)
 
   useEffect(() => {
-    // Check if Firebase is configured
-    if (!auth) {
-      setLoading(false)
-      setIsConfigured(false)
-      return
-    }
+    const unsubscribe = auth.onAuthStateChanged(
+      async (user) => {
+        if (user) {
+          setUser(user)
+        } else {
+          setUser(null)
+        }
 
-    setIsConfigured(true)
-
-    // Set up auth state listener
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user)
-      setLoading(false)
-
-      // Update cookie for middleware
-      if (typeof window !== 'undefined') {
-        document.cookie = `fb-authed=${user ? 'true' : 'false'}; path=/; max-age=${30 * 24 * 60 * 60}`
+        setLoading(false)
       }
-    })
+    )
 
     return () => unsubscribe()
   }, [])
 
-  const signOut = async () => {
-    if (!auth) return
-
+  const signIn = async (email: string, password: string) => {
+    if (!auth) return;
     try {
-      await firebaseSignOut(auth)
-      // Clear cookie
-      if (typeof window !== 'undefined') {
-        document.cookie = 'fb-authed=false; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'
-      }
-    } catch (error) {
-      console.error("Sign out error:", error)
+      await signInWithEmailAndPassword(auth, email, password)
+    } catch (error: any) {
+      throw error
     }
   }
 
-  const value: AuthContextType = {
-    user,
-    loading,
-    signOut,
-    isConfigured
+  const signUp = async (email: string, password: string, displayName?: string) => {
+    if (!auth) return;
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+
+      if (displayName) {
+        await updateProfile(userCredential.user, {
+          displayName: displayName
+        })
+      }
+
+    } catch (error: any) {
+      throw error
+    }
+  }
+
+  const logout = async () => {
+    if (!auth) return;
+
+    try {
+      await signOut(auth)
+    } catch (error: any) {
+      throw error
+    }
+  }
+
+  const resetPassword = async (email: string) => {
+    if (!auth) return;
+
+    try {
+      await sendPasswordResetEmail(auth, email)
+    } catch (error: any) {
+      throw error
+    }
+  }
+
+  if (!auth) {
+    return <div>Firebase not configured</div>
   }
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{
+      user,
+      loading,
+      signIn,
+      signUp,
+      logout,
+      resetPassword
+    }}>
       {children}
     </AuthContext.Provider>
   )
 }
+
+export const useFirebaseAuth = () => useContext(AuthContext)

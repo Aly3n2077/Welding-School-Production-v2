@@ -1,4 +1,3 @@
-
 import { initializeApp, getApps, FirebaseApp } from "firebase/app"
 import { getAuth, Auth } from "firebase/auth"
 
@@ -41,45 +40,48 @@ function getFirebaseConfig(): FirebaseConfig | null {
 // Initialize Firebase app
 let app: FirebaseApp | null = null
 let auth: Auth | null = null
+let db: Firestore | null = null
 
-function initializeFirebase(): { app: FirebaseApp | null; auth: Auth | null } {
+// Initialize Firebase only if configuration is available
+export function initializeFirebase() {
+  if (app) return { app, auth, db }
+
   try {
     const config = getFirebaseConfig()
-    
-    if (!config) {
-      return { app: null, auth: null }
+
+    if (!config || !config.apiKey) {
+      console.warn("Firebase configuration missing - running in demo mode")
+      return { app: null, auth: null, db: null }
     }
 
-    // Only initialize if not already initialized
     if (getApps().length === 0) {
       app = initializeApp(config)
     } else {
       app = getApps()[0]
     }
-
     auth = getAuth(app)
-    return { app, auth }
+    //db = getFirestore(app)
+
+    console.log("Firebase initialized successfully")
+    return { app, auth, db }
   } catch (error) {
-    if (typeof window !== 'undefined') {
-      console.error('Failed to initialize Firebase:', error)
-    }
-    return { app: null, auth: null }
+    console.error("Firebase initialization failed:", error)
+    return { app: null, auth: null, db: null }
   }
 }
 
 // Initialize Firebase
-const { app: firebaseApp, auth: firebaseAuth } = initializeFirebase()
+const { app: firebaseApp, auth: firebaseAuth, db: firebaseDb } = initializeFirebase()
 
-// Export auth instance (may be null if configuration is missing)
-export { firebaseAuth as auth }
-export default firebaseApp
+export { firebaseApp as app, firebaseAuth as auth, firebaseDb as db }
 
-// Export configuration status for debugging
+// Export a function to check Firebase status
 export function getFirebaseStatus() {
   const config = getFirebaseConfig()
   return {
     configured: config !== null,
-    app: firebaseApp !== null,
-    auth: firebaseAuth !== null
+    app: Boolean(app),
+    auth: Boolean(auth),
+    db: Boolean(db)
   }
 }
