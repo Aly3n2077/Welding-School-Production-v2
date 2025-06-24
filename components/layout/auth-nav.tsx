@@ -1,6 +1,6 @@
 "use client"
 
-import { useFirebaseAuth } from "@/components/providers/firebase-auth-provider"
+import { useAuth } from '@/components/providers/firebase-auth-provider'
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -15,7 +15,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 export function AuthNav() {
-  const { user, isAdmin, loading, signOut } = useFirebaseAuth()
+  const { user, isAdmin, loading, signOut } = useAuth()
   const router = useRouter()
 
   const handleSignOut = async () => {
