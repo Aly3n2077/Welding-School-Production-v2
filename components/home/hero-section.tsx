@@ -59,27 +59,27 @@ const HeroSection = () => {
             </p>
           </ScrollAnimation>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 stagger-animation">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 px-4 sm:px-0">
             <ScrollAnimation type="fade-up" delay={0.6} duration={0.7}>
-              <Link href="/admissions" className="group relative px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-welding-orange to-yellow-500 text-white font-bold text-lg sm:text-xl rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 w-full sm:w-auto text-center border-2 border-white/20">
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-welding-orange/90 to-yellow-400/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="relative flex items-center justify-center">
+              <Link href="/admissions" className="group relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-welding-orange-500 to-yellow-500 text-white font-bold text-base sm:text-lg lg:text-xl rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 w-full sm:w-auto text-center border-2 border-white/20 min-w-[200px] sm:min-w-[220px]">
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-welding-orange-600 to-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                <span className="relative flex items-center justify-center whitespace-nowrap">
                   Enroll Now
                   <ArrowRight
-                    size={20}
-                    className="ml-3 inline-block transition-transform duration-300 group-hover:translate-x-2"
+                    size={18}
+                    className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1"
                   />
                 </span>
               </Link>
             </ScrollAnimation>
 
             <ScrollAnimation type="fade-up" delay={0.7} duration={0.7}>
-              <Link href="/courses" className="group relative px-8 py-4 sm:px-10 sm:py-5 bg-transparent border-2 border-white text-white font-bold text-lg sm:text-xl rounded-full hover:bg-white hover:text-steel-blue transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 w-full sm:w-auto text-center shadow-xl">
-                <span className="flex items-center justify-center">
+              <Link href="/courses" className="group relative px-6 py-3 sm:px-8 sm:py-4 bg-transparent border-2 border-white text-white font-bold text-base sm:text-lg lg:text-xl rounded-full hover:bg-white hover:text-steel-blue transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 w-full sm:w-auto text-center shadow-xl min-w-[200px] sm:min-w-[220px]">
+                <span className="flex items-center justify-center whitespace-nowrap">
                   Explore Programs
                   <ArrowRight
-                    size={20}
-                    className="ml-3 inline-block transition-transform duration-300 group-hover:translate-x-2"
+                    size={18}
+                    className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1"
                   />
                 </span>
               </Link>
@@ -88,10 +88,10 @@ const HeroSection = () => {
 
           <ScrollAnimation type="fade-up" delay={0.8} duration={0.7}>
             <div className="mt-12 bg-gradient-to-r from-steel-blue/90 to-welding-orange/90 backdrop-blur-md p-6 sm:p-8 rounded-2xl inline-block transition-all duration-300 hover:shadow-2xl transform hover:scale-105 border-2 border-white/30 text-center max-w-2xl mx-auto">
-              <p className="font-black text-white text-xl sm:text-2xl mb-2">💰 Investment: $200 | ⏰ Duration: 2 Months</p>
-              <p className="text-lg sm:text-xl text-white font-semibold">🚀 Potential earnings: $3K-$4K per month in Zimbabwe</p>
+              <p className="font-black text-white text-xl sm:text-2xl mb-2">Investment: $200 | Duration: 2 Months</p>
+              <p className="text-lg sm:text-xl text-white font-semibold">Potential earnings: $3K-$4K per month in Zimbabwe</p>
               <div className="mt-4 text-sm text-white/90 font-medium">
-                ✅ Lifetime support • ✅ Industry certification • ✅ Job placement assistance
+                Lifetime support • Industry certification • Job placement assistance
               </div>
             </div>
           </ScrollAnimation>
