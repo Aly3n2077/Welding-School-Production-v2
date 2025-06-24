@@ -13,23 +13,77 @@ const placeholderCourses = [
   {
     id: "1",
     slug: "smaw-welding",
-    title: "SMAW Welding (Placeholder)",
-    description: "Learn Shielded Metal Arc Welding techniques. (Placeholder description)",
-    image: "/images/courses/smaw-welding.jpeg", // Ensure this image exists
+    title: "SMAW Welding",
+    description:
+      "Learn the fundamentals of Shielded Metal Arc Welding (SMAW), including safety, equipment setup, and basic welding techniques on various materials.",
+    duration: "6 Months",
+    schedule: "Mon-Fri 8:00 AM - 4:00 PM",
+    certification: "SMAW Certification",
+    image: "/images/courses/smaw-welding.jpeg",
+    price: 65,
+    totalPrice: 390,
+    examFee: "100-299",
+    programLength: "6 months",
   },
   {
     id: "2",
     slug: "mig-welding",
-    title: "MIG Welding (Placeholder)",
-    description: "Master Metal Inert Gas Welding. (Placeholder description)",
-    image: "/images/courses/mig-welding-sparks.jpeg", // Ensure this image exists
+    title: "MIG Welding",
+    description:
+      "Explore Metal Inert Gas (MIG) welding with focus on techniques for welding ferrous and non-ferrous metals, equipment maintenance, and troubleshooting.",
+    duration: "6 Months",
+    schedule: "Mon-Fri 8:00 AM - 4:00 PM",
+    certification: "MIG Certification",
+    image: "/images/courses/mig-welding-sparks.jpeg",
+    price: 65,
+    totalPrice: 390,
+    examFee: "100-299",
+    programLength: "6 months",
   },
   {
     id: "3",
     slug: "tig-welding",
-    title: "TIG Welding (Placeholder)",
-    description: "Advanced Tungsten Inert Gas Welding. (Placeholder description)",
-    image: "/images/courses/tig-welding-closeup.jpeg", // Ensure this image exists
+    title: "TIG Welding",
+    description:
+      "Master Tungsten Inert Gas (TIG) welding, known for its precision and clean welds. Suitable for detailed work on aluminum, stainless steel, and other alloys.",
+    duration: "8 Months",
+    schedule: "Mon-Fri 8:00 AM - 4:00 PM",
+    certification: "TIG Certification",
+    image: "/images/courses/tig-welding-closeup.jpeg",
+    price: 80,
+    totalPrice: 640,
+    examFee: "200-399",
+    programLength: "8 months",
+  },
+  {
+    id: "4",
+    slug: "pipe-welding",
+    title: "Pipe Welding",
+    description:
+      "Specialized course focusing on pipe welding techniques, including position welding, root passes, and fill passes for various pipe materials and sizes.",
+    duration: "8 Months",
+    schedule: "Mon-Fri 8:00 AM - 4:00 PM",
+    certification: "Pipe Welding Certification",
+    image: "/images/courses/pipe-joint-welding.jpeg",
+    price: 80,
+    totalPrice: 640,
+    examFee: "300-499",
+    programLength: "8 months",
+  },
+  {
+    id: "5",
+    slug: "boiler-making",
+    title: "Boiler Making",
+    description:
+      "Comprehensive training in boiler construction, repair, and maintenance. Covers pressure vessel fabrication, safety regulations, and quality control.",
+    duration: "8 Months",
+    schedule: "Mon-Fri 8:00 AM - 4:00 PM",
+    certification: "Boiler Making Certification",
+    image: "/images/courses/boiler-equipment.jpeg",
+    price: 80,
+    totalPrice: 640,
+    examFee: "400-599",
+    programLength: "8 months",
   },
 ]
 
@@ -265,6 +319,20 @@ export default function CoursesClientPage() {
                                 <li className="text-gray-500 italic">Course topics will be available soon</li>
                               )}
                             </ul>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
+                          <div className="flex flex-col space-y-1">
+                            <div className="flex items-center space-x-2">
+                              <span className="text-lg sm:text-xl font-bold text-welding-orange">
+                                ${course.price}/month
+                              </span>
+                              <span className="text-sm text-gray-500">({course.programLength})</span>
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              Total: ${course.totalPrice} + Exam: ${course.examFee}
+                            </div>
                           </div>
                         </div>
 

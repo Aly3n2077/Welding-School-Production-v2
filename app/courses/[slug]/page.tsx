@@ -17,8 +17,11 @@ const placeholderCoursesData: { [key: string]: any } = {
       "This placeholder course covers the fundamentals of Shielded Metal Arc Welding (SMAW), including safety, equipment setup, and basic welding techniques on various materials. Ideal for beginners looking to start a career in welding.",
     longDescription:
       "Detailed placeholder content for SMAW Welding. This section would elaborate on specific modules, learning outcomes, tools used, and career prospects. For example, students will learn about different types of electrodes, welding positions (flat, horizontal, vertical, overhead), and how to read welding symbols. Practical exercises will form a significant part of this course.",
-    duration: "6 Weeks (Placeholder)",
-    price: "$500 (Placeholder)",
+    duration: "6 Months Program",
+    price: "$65/month (Total: $390 + Exam fees: $100-299)",
+    monthlyPrice: 65,
+    totalPrice: 390,
+    examFee: "100-299",
     image: "/images/courses/smaw-welding.jpeg",
   },
   "mig-welding": {
@@ -29,8 +32,11 @@ const placeholderCoursesData: { [key: string]: any } = {
       "Explore Metal Inert Gas (MIG) welding with this placeholder course. Focuses on techniques for welding ferrous and non-ferrous metals, equipment maintenance, and troubleshooting common MIG welding issues.",
     longDescription:
       "Detailed placeholder content for MIG Welding. This would cover topics like wire feed speed, voltage settings, shielding gases, and different transfer modes (short circuit, globular, spray). Students will practice on various joint types and material thicknesses.",
-    duration: "8 Weeks (Placeholder)",
-    price: "$600 (Placeholder)",
+    duration: "6 Months Program",
+    price: "$65/month (Total: $390 + Exam fees: $100-299)",
+    monthlyPrice: 65,
+    totalPrice: 390,
+    examFee: "100-299",
     image: "/images/courses/mig-welding-sparks.jpeg",
   },
   "tig-welding": {
@@ -41,8 +47,11 @@ const placeholderCoursesData: { [key: string]: any } = {
       "This placeholder course is for those looking to master Tungsten Inert Gas (TIG) welding, known for its precision and clean welds. Suitable for detailed work on aluminum, stainless steel, and other alloys.",
     longDescription:
       "Detailed placeholder content for TIG Welding. This would include information on AC/DC TIG welding, tungsten electrode types and preparation, filler metal selection, and techniques for achieving high-quality welds on thin materials and complex joints.",
-    duration: "10 Weeks (Placeholder)",
-    price: "$750 (Placeholder)",
+    duration: "8 Months Program",
+    price: "$80/month (Total: $640 + Exam fees: $200-399)",
+    monthlyPrice: 80,
+    totalPrice: 640,
+    examFee: "200-399",
     image: "/images/courses/tig-welding-closeup.jpeg",
   },
 }
