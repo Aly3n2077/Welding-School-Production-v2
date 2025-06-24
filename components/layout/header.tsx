@@ -88,15 +88,15 @@ function Header() {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center group">
-              <Logo className="h-8 md:h-10 transition-transform group-hover:scale-105" />
-              <div className="ml-3 hidden md:block">
-                <div className="text-steel-blue font-bold text-lg">MRONCY</div>
-                <div className="text-welding-orange text-xs font-medium">Welding Centre</div>
+              <Logo className="h-10 md:h-12 lg:h-14 transition-transform group-hover:scale-110 drop-shadow-md" />
+              <div className="ml-4 hidden md:block">
+                <div className="text-steel-blue font-black text-xl lg:text-2xl tracking-tight">MRONCY</div>
+                <div className="text-welding-orange text-sm lg:text-base font-bold tracking-wide">Welding Centre</div>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
+            <nav className="hidden lg:flex items-center space-x-10">
               {navigation.map((item) => (
                 <div key={item.name} className="relative group">
                   {item.hasDropdown ? (
@@ -178,9 +178,9 @@ function Header() {
             <div className="flex items-center space-x-4">
               <Link
                 href="/admissions"
-                className="hidden md:inline-flex items-center px-4 py-2 bg-welding-orange text-white font-medium rounded-md hover:bg-welding-orange/90 transition-colors shadow-md hover:shadow-lg transform hover:scale-105"
+                className="hidden md:inline-flex items-center px-6 py-3 bg-gradient-to-r from-welding-orange to-yellow-500 text-white font-bold rounded-full hover:from-welding-orange/90 hover:to-yellow-400/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-110 hover:-translate-y-1 border border-white/20"
               >
-                <Users size={16} className="mr-2" />
+                <Users size={18} className="mr-2" />
                 Apply Now
               </Link>
 

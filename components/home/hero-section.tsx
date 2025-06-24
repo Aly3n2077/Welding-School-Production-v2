@@ -43,49 +43,56 @@ const HeroSection = () => {
       <div className="container-custom relative z-10 py-16 md:py-24">
         <div className="max-w-4xl mx-auto text-center">
           <div className={`transition-all duration-1000 ${isLoaded ? "opacity-100" : "opacity-0 translate-y-10"}`}>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white mb-8 leading-tight drop-shadow-2xl">
               <span
                 className="block transform transition-transform duration-700 delay-100 ease-out 
-                              translate-y-0 opacity-100"
+                              translate-y-0 opacity-100 text-shadow-lg"
               >
-                Unlock a <span className="text-welding-orange">Lucrative Career</span> in Welding
+                Unlock a <span className="text-welding-orange bg-gradient-to-r from-welding-orange to-yellow-400 bg-clip-text text-transparent drop-shadow-lg">Lucrative Career</span> in Welding
               </span>
             </h1>
           </div>
 
           <ScrollAnimation type="fade-up" delay={0.4} duration={0.7}>
-            <p className="text-white/90 text-base sm:text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl mb-10 max-w-4xl mx-auto leading-relaxed font-semibold drop-shadow-lg">
               Professional Training | Industry Certification | Business Development
             </p>
           </ScrollAnimation>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 stagger-animation">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 stagger-animation">
             <ScrollAnimation type="fade-up" delay={0.6} duration={0.7}>
-              <Link href="/admissions" className="btn-primary group w-full sm:w-auto">
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-welding-orange to-welding-orange/80 group-hover:scale-110 transition-transform duration-500 z-[-1]"></span>
-                <span className="relative">Enroll Now</span>
-                <ArrowRight
-                  size={16}
-                  className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1"
-                />
+              <Link href="/admissions" className="group relative px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-welding-orange to-yellow-500 text-white font-bold text-lg sm:text-xl rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 w-full sm:w-auto text-center border-2 border-white/20">
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-welding-orange/90 to-yellow-400/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                <span className="relative flex items-center justify-center">
+                  Enroll Now
+                  <ArrowRight
+                    size={20}
+                    className="ml-3 inline-block transition-transform duration-300 group-hover:translate-x-2"
+                  />
+                </span>
               </Link>
             </ScrollAnimation>
 
             <ScrollAnimation type="fade-up" delay={0.7} duration={0.7}>
-              <Link href="/courses" className="btn-secondary group w-full sm:w-auto">
-                Explore Programs
-                <ArrowRight
-                  size={16}
-                  className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1"
-                />
+              <Link href="/courses" className="group relative px-8 py-4 sm:px-10 sm:py-5 bg-transparent border-2 border-white text-white font-bold text-lg sm:text-xl rounded-full hover:bg-white hover:text-steel-blue transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 w-full sm:w-auto text-center shadow-xl">
+                <span className="flex items-center justify-center">
+                  Explore Programs
+                  <ArrowRight
+                    size={20}
+                    className="ml-3 inline-block transition-transform duration-300 group-hover:translate-x-2"
+                  />
+                </span>
               </Link>
             </ScrollAnimation>
           </div>
 
           <ScrollAnimation type="fade-up" delay={0.8} duration={0.7}>
-            <div className="mt-8 bg-welding-orange/80 backdrop-blur-sm p-3 sm:p-4 rounded-lg inline-block transition-all duration-300 hover:shadow-lg transform hover:scale-105 border border-welding-orange/30 text-sm sm:text-base">
-              <p className="font-bold text-white">Investment: $200 | Duration: 2 Months</p>
-              <p className="text-xs sm:text-sm text-white/90">Potential earnings: $3K-$4K per month in Zimbabwe</p>
+            <div className="mt-12 bg-gradient-to-r from-steel-blue/90 to-welding-orange/90 backdrop-blur-md p-6 sm:p-8 rounded-2xl inline-block transition-all duration-300 hover:shadow-2xl transform hover:scale-105 border-2 border-white/30 text-center max-w-2xl mx-auto">
+              <p className="font-black text-white text-xl sm:text-2xl mb-2">💰 Investment: $200 | ⏰ Duration: 2 Months</p>
+              <p className="text-lg sm:text-xl text-white font-semibold">🚀 Potential earnings: $3K-$4K per month in Zimbabwe</p>
+              <div className="mt-4 text-sm text-white/90 font-medium">
+                ✅ Lifetime support • ✅ Industry certification • ✅ Job placement assistance
+              </div>
             </div>
           </ScrollAnimation>
         </div>

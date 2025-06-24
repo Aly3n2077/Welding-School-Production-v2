@@ -100,8 +100,18 @@ const config: Config = {
         },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        'float': 'float 6s ease-in-out infinite',
+        'bounce-subtle': 'bounce-subtle 2s infinite',
+        'stagger': 'stagger 0.5s ease-out forwards',
+      },
+      textShadow: {
+        'lg': '2px 2px 4px rgba(0, 0, 0, 0.5)',
+        'xl': '3px 3px 6px rgba(0, 0, 0, 0.7)',
+      },
+      boxShadow: {
+        '3xl': '0 35px 60px -12px rgba(0, 0, 0, 0.25)',
       },
     },
   },
