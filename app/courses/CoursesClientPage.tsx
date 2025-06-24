@@ -7,6 +7,7 @@ import Breadcrumbs from "@/components/navigation/breadcrumbs"
 import { ScrollAnimation } from "@/components/ui/scroll-animation"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { useState, useEffect } from "react";
 
 const placeholderCourses = [
   {
@@ -150,6 +151,19 @@ const courses = [
 ]
 
 export default function CoursesClientPage() {
+  const [searchTerm, setSearchTerm] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("all")
+  const [selectedLevel, setSelectedLevel] = useState("all")
+  const [selectedFormat, setSelectedFormat] = useState("all")
+  const [selectedDuration, setSelectedDuration] = useState("all")
+  const [currentPage, setCurrentPage] = useState(1)
+  const [isLoading, setIsLoading] = useState(false)
+
+  // Use useEffect for any side effects
+  useEffect(() => {
+    // Any initialization logic should go here
+  }, [])
+
   // Define breadcrumb items for this page
   const breadcrumbItems = [{ label: "Courses", path: "/courses" }]
 

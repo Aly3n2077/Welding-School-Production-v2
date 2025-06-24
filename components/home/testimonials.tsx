@@ -168,9 +168,10 @@ const Testimonials = () => {
                       <div className="flex flex-col md:flex-row items-center md:items-start gap-4 sm:gap-6">
                         <div className="relative w-16 h-16 sm:w-24 sm:h-24 rounded-full overflow-hidden flex-shrink-0 border-2 border-welding-orange shadow-lg transition-transform duration-500 hover:scale-110 group">
                           <Image
-                            src={testimonial.image || "/placeholder.svg"}
+                            src={`/placeholder.svg?height=100&width=100&text=${encodeURIComponent(testimonial.name.split(' ').map(n => n[0]).join('+'))}`}
                             alt={testimonial.name}
                             fill
+                            sizes="100px"
                             className="object-cover transition-all duration-500 group-hover:scale-110"
                           />
                         </div>

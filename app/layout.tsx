@@ -16,6 +16,7 @@ import { FirebaseAuthProvider } from '@/components/providers/firebase-auth-provi
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: "Mroncy School of Welding - Professional Welding Training",
   description:
     "Join Mroncy School of Welding for top-tier welding education and certification. Offering diverse courses in SMAW, TIG, MIG, and more. Start your welding career today!",
