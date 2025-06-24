@@ -8,9 +8,9 @@ import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
-import { FirebaseAuthProvider } from "@/components/providers/firebase-auth-provider" // Ensure this is the correct path
 import AnimationInitializer from "@/components/animation-initializer"
 import BusinessSchema from "@/components/structured-data/business-schema"
+import { AuthStatus } from '@/components/auth-status'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -68,11 +68,12 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <FirebaseAuthProvider>
-            {" "}
-            {/* This is the primary auth provider now */}
             <div className="flex flex-col min-h-screen">
               <Header />
-              <main className="flex-grow">{children}</main>
+              <main className="flex-grow">
+                <AuthStatus />
+                {children}
+              </main>
               <Footer />
             </div>
             <Toaster />
