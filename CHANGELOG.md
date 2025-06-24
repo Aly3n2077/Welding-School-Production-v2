@@ -2,6 +2,34 @@
 
 All notable changes to the MRONCY School of Welding website will be documented in this file.
 
+## [1.5.0] - 2024-01-24
+
+### Added
+- Enhanced hero section with improved button styling and responsiveness
+- Professional button design with consistent hover effects
+- Better mobile optimization for call-to-action buttons
+- Improved button text visibility and transitions
+
+### Changed
+- Updated hero section buttons to be fully mobile-responsive
+- Removed emojis from hero section for professional appearance  
+- Enhanced button animations with smooth scaling effects
+- Improved button sizing and spacing across all screen sizes
+- Refined glassmorphism effects on hero buttons
+
+### Fixed
+- Fixed CSS syntax error with custom color opacity modifiers in globals.css
+- Resolved button layout issues on mobile devices where buttons appeared "cut off"
+- Fixed button text visibility issues on white/transparent buttons
+- Corrected hover state transitions for better user experience
+- Fixed button scaling and positioning problems across different viewport sizes
+
+### Technical
+- Replaced invalid Tailwind CSS classes (`hover:from-welding-orange/90`) with standard color classes
+- Improved button CSS with proper transform and transition properties
+- Enhanced mobile-first responsive design approach
+- Optimized button rendering performance
+
 ## [1.4.0] - 2023-05-12
 
 ### Added
