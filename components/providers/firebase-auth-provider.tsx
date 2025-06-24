@@ -15,6 +15,7 @@ import { auth } from "@/lib/firebase"
 interface AuthContextType {
   user: User | null
   loading: boolean
+  isConfigured: boolean
   signIn: (email: string, password: string) => Promise<void>
   signUp: (email: string, password: string, displayName?: string) => Promise<void>
   logout: () => Promise<void>
@@ -26,6 +27,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function FirebaseAuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isConfigured] = useState(!!auth)
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(
@@ -97,6 +99,7 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
     <AuthContext.Provider value={{
       user,
       loading,
+      isConfigured,
       signIn,
       signUp,
       logout,
@@ -108,3 +111,11 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
 }
 
 export const useFirebaseAuth = () => useContext(AuthContext)
+
+export const useAuth = () => {
+  const context = useContext(AuthContext)
+  if (context === undefined) {
+    throw new Error('useAuth must be used within a FirebaseAuthProvider')
+  }
+  return context
+}

@@ -7,7 +7,7 @@ import { Menu, X, Phone, Mail, MapPin, Clock, ChevronDown, Award, Users, BookOpe
 import { Logo } from "@/components/ui/logo"
 import { AuthNav } from "./auth-nav"
 
-export function Header() {
+function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [coursesDropdownOpen, setCoursesDropdownOpen] = useState(false)
@@ -258,3 +258,5 @@ export function Header() {
     </>
   )
 }
+
+export default Header
