@@ -70,7 +70,7 @@
 
 @layer components {
   .btn-primary {
-    @apply px-8 py-4 bg-gradient-to-r from-welding-orange to-yellow-500 text-white font-bold rounded-full hover:from-welding-orange/90 hover:to-yellow-400/90 transition-all duration-300 shadow-xl hover:shadow-2xl inline-flex items-center transform hover:scale-110 hover:-translate-y-1 border border-white/20;
+    @apply px-8 py-4 bg-gradient-to-r from-welding-orange-500 to-yellow-500 text-white font-bold rounded-full hover:from-welding-orange-600 hover:to-yellow-400 transition-all duration-300 shadow-xl hover:shadow-2xl inline-flex items-center transform hover:scale-110 hover:-translate-y-1 border border-white/20;
   }
 
   .btn-secondary {
@@ -91,7 +91,7 @@
   /* Add underline animation to section titles */
   .section-title::after {
     content: "";
-    @apply absolute bottom-0 left-1/2 w-0 h-1 bg-welding-orange transform -translate-x-1/2 transition-all duration-500;
+    @apply absolute bottom-0 left-1/2 w-0 h-1 bg-welding-orange-500 transform -translate-x-1/2 transition-all duration-500;
   }
 
   .section-title:hover::after {
@@ -222,7 +222,7 @@
 
   .link-hover::after {
     content: "";
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-welding-orange transition-all duration-300;
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-welding-orange-500 transition-all duration-300;
   }
 
   .link-hover:hover::after {
