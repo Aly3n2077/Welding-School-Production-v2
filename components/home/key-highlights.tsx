@@ -63,7 +63,7 @@ const KeyHighlights = () => {
           <div className="mt-12 md:mt-16 text-center">
             <a
               href="/courses"
-              className="inline-block bg-welding-orange text-white font-medium py-3 px-6 rounded-md shadow-md hover:bg-welding-orange-dark transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-sm md:text-base"
+              className="inline-block bg-welding-orange text-white font-medium py-3 px-6 rounded-md shadow-md hover:bg-orange-600 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-sm md:text-base"
             >
               Explore Our Courses
             </a>
