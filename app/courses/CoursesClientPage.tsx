@@ -249,14 +249,20 @@ export default function CoursesClientPage() {
                           <div>
                             <h3 className="font-bold text-base sm:text-lg mb-2">What You'll Learn</h3>
                             <ul className="space-y-1 text-sm sm:text-base">
-                              {course.topics.slice(0, 4).map((topic, index) => (
-                                <li key={index} className="flex items-start">
-                                  <CheckCircle size={16} className="text-welding-orange mr-2 mt-1 flex-shrink-0" />
-                                  <span className="text-gray-700">{topic}</span>
-                                </li>
-                              ))}
-                              {course.topics.length > 4 && (
-                                <li className="text-welding-orange font-medium">And more...</li>
+                              {course.topics && course.topics.length > 0 ? (
+                                <>
+                                  {course.topics.slice(0, 4).map((topic, index) => (
+                                    <li key={index} className="flex items-start">
+                                      <CheckCircle size={16} className="text-welding-orange mr-2 mt-1 flex-shrink-0" />
+                                      <span className="text-gray-700">{topic}</span>
+                                    </li>
+                                  ))}
+                                  {course.topics.length > 4 && (
+                                    <li className="text-welding-orange font-medium">And more...</li>
+                                  )}
+                                </>
+                              ) : (
+                                <li className="text-gray-500 italic">Course topics will be available soon</li>
                               )}
                             </ul>
                           </div>
