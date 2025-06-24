@@ -16,9 +16,10 @@ const paymentMethods: PaymentMethod[] = [
     logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Mukuru-Logo-Pack-Orange.png-PXKEdDAG2bECvJ1HBvm4sOzlBftuR7.webp",
     instructions: `To pay with Mukuru:
 1. Send money to account number: 12345678
-2. Use your full name and course ID as reference
-3. Enter the transaction reference number below
-4. We'll verify your payment within 24 hours`,
+2. Amount: $[AMOUNT] USD
+3. Use your full name and course ID as reference
+4. Enter the transaction reference number below
+5. We'll verify your payment within 24 hours`,
     enabled: true,
   },
   {
@@ -30,7 +31,7 @@ const paymentMethods: PaymentMethod[] = [
 1. Dial *151# on your phone
 2. Select "Send Money"
 3. Enter merchant code: 123456
-4. Enter the amount: $${0} USD
+4. Enter the amount: $[AMOUNT] USD
 5. Enter your PIN
 6. Enter the confirmation code below`,
     enabled: true,
@@ -44,7 +45,7 @@ const paymentMethods: PaymentMethod[] = [
 1. Open your InnBucks app
 2. Select "Pay Merchant"
 3. Enter merchant ID: MRONCY
-4. Enter the amount and confirm
+4. Enter the amount: $[AMOUNT] USD and confirm
 5. Enter the transaction reference number below`,
     enabled: true,
   },

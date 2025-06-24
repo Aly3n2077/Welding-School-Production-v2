@@ -113,7 +113,7 @@ export function PaymentMethods({ courseId, courseTitle, price, onPaymentComplete
               <span className="font-medium">{courseTitle}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Price:</span>
+              <span className="text-gray-600">Monthly Payment:</span>
               <span className="font-medium">${price.toFixed(2)} USD</span>
             </div>
           </div>
@@ -137,7 +137,9 @@ export function PaymentMethods({ courseId, courseTitle, price, onPaymentComplete
                   <p className="text-sm text-gray-600">{selectedPaymentMethod.description}</p>
                 </div>
               </div>
-              <div className="whitespace-pre-line text-gray-700">{selectedPaymentMethod.instructions}</div>
+              <div className="whitespace-pre-line text-gray-700">
+                {selectedPaymentMethod.instructions.replace(/\[AMOUNT\]/g, price.toFixed(2))}
+              </div>
               <Button className="mt-4 w-full" onClick={handleSubmitPayment} disabled={isProcessing}>
                 {isProcessing ? (
                   <>

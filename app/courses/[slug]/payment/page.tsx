@@ -1,3 +1,7 @@
+The code has been updated to reflect the new pricing structure by changing the payment amounts to use course.monthlyPrice instead of course.price.
+```
+
+```replit_final_file
 "use client"
 
 import { useState } from "react"
@@ -32,6 +36,7 @@ export default function PaymentPage({ params }: PaymentPageProps) {
     title: "SMAW Welding Certification",
     price: 299.99,
     image: "/images/courses/smaw-welding.jpeg",
+	monthlyPrice: 29.99,
   }
 
   const handlePayment = async () => {
@@ -142,7 +147,7 @@ export default function PaymentPage({ params }: PaymentPageProps) {
                         <li>Dial *151# on your phone</li>
                         <li>Select "Send Money"</li>
                         <li>Enter merchant code: 123456</li>
-                        <li>Enter amount: ${course.price.toFixed(2)}</li>
+                        <li>Enter amount: ${course.monthlyPrice.toFixed(2)}</li>
                         <li>Enter your PIN</li>
                         <li>Confirm payment</li>
                       </ol>
@@ -165,7 +170,7 @@ export default function PaymentPage({ params }: PaymentPageProps) {
                         <li>Open your Mukuru app</li>
                         <li>Select "Pay"</li>
                         <li>Enter business ID: MRONCY2023</li>
-                        <li>Enter amount: ${course.price.toFixed(2)}</li>
+                        <li>Enter amount: ${course.monthlyPrice.toFixed(2)}</li>
                         <li>Confirm payment details</li>
                         <li>Complete transaction</li>
                       </ol>
@@ -188,7 +193,7 @@ export default function PaymentPage({ params }: PaymentPageProps) {
                         <li>Log in to your InnBucks account</li>
                         <li>Select "Transfer"</li>
                         <li>Enter recipient: MRONCY</li>
-                        <li>Enter amount: ${course.price.toFixed(2)}</li>
+                        <li>Enter amount: ${course.monthlyPrice.toFixed(2)}</li>
                         <li>Add reference: {course.slug}</li>
                         <li>Confirm and send payment</li>
                       </ol>
@@ -225,7 +230,7 @@ export default function PaymentPage({ params }: PaymentPageProps) {
                       Enrolled Successfully
                     </>
                   ) : (
-                    `Complete Payment ($${course.price.toFixed(2)})`
+                    `Complete Payment ($${course.monthlyPrice.toFixed(2)})`
                   )}
                 </Button>
               </CardFooter>
@@ -248,11 +253,11 @@ export default function PaymentPage({ params }: PaymentPageProps) {
                 <div className="border-t pt-4">
                   <div className="flex justify-between">
                     <span>Course Price</span>
-                    <span>${course.price.toFixed(2)}</span>
+                    <span>${course.monthlyPrice.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between font-bold mt-2 text-lg">
                     <span>Total</span>
-                    <span>${course.price.toFixed(2)}</span>
+                    <span>${course.monthlyPrice.toFixed(2)}</span>
                   </div>
                 </div>
               </CardContent>
