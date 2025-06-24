@@ -16,7 +16,7 @@ function SubmitButton() {
   const { pending } = useFormStatus()
 
   return (
-    <button type="submit" disabled={pending} className="w-full bg-welding-orange text-white font-bold py-4 px-8 rounded-full hover:bg-orange-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed">
+    <button type="submit" disabled={pending} className="w-full bg-welding-orange text-white font-bold py-4 px-8 rounded-full hover:bg-orange-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-xl">
       {pending ? (
         <span className="flex items-center justify-center">
           <Loader2 size={20} className="mr-2 animate-spin" />
