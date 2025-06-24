@@ -6,7 +6,6 @@ import type { User as FirebaseUser } from "firebase/auth"
 import { onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth"
 import { auth } from "@/lib/firebase"
 import FullPageLoader from "@/components/ui/full-page-loader" // Corrected import path
-import { ErrorBoundary } from "@/components/error-boundary"
 
 interface FirebaseAuthContextType {
   user: FirebaseUser | null
@@ -26,7 +25,7 @@ const setAuthCookie = (isAuthed: boolean) => {
   }
 }
 
-const FirebaseAuthProviderComponent = ({ children }: { children: ReactNode }) => {
+export function FirebaseAuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<FirebaseUser | null>(null)
   const [isAdmin, setIsAdmin] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -84,14 +83,6 @@ const FirebaseAuthProviderComponent = ({ children }: { children: ReactNode }) =>
 
   return (
     <FirebaseAuthContext.Provider value={{ user, isAdmin, loading, signOut }}>{children}</FirebaseAuthContext.Provider>
-  )
-}
-
-export function FirebaseAuthProvider({ children }: { children: ReactNode }) {
-  return (
-    <ErrorBoundary>
-      <FirebaseAuthProviderComponent>{children}</FirebaseAuthProviderComponent>
-    </ErrorBoundary>
   )
 }
 
