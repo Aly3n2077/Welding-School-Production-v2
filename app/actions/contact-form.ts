@@ -4,7 +4,7 @@ import { z } from "zod"
 import { Resend } from "resend"
 import { config } from "@/app/config"
 import AdminNotificationEmail from "@/app/emails/admin-notification"
-import { UserConfirmationEmail } from "@/app/emails/user-confirmation"
+import UserConfirmationEmail from "@/app/emails/user-confirmation"
 
 // Initialize Resend
 const resend = new Resend(config.email.resendApiKey)
