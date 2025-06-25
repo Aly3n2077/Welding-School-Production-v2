@@ -1,14 +1,16 @@
 "use client"
 
+import type React from "react"
+
 import { createContext, useContext, useEffect, useState } from "react"
-import { 
-  User,
+import {
+  type User,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
-  updateProfile
+  updateProfile,
 } from "firebase/auth"
 import { auth } from "@/lib/firebase"
 
@@ -16,10 +18,10 @@ interface AuthContextType {
   user: User | null
   loading: boolean
   isConfigured: boolean
+  isAdmin: boolean
   signIn: (email: string, password: string) => Promise<void>
   signUp: (email: string, password: string, displayName?: string) => Promise<void>
   logout: () => Promise<void>
-  resetPassword: (email: string) => Promise<void>
   resetPassword: (email: string) => Promise<void>
 }
 
@@ -29,6 +31,7 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [isConfigured] = useState(!!auth)
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     if (!auth) {
@@ -36,8 +39,17 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
       return
     }
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user)
+
+      if (user) {
+        // Check if user is admin (you can customize this logic)
+        const adminEmails = process.env.NEXT_PUBLIC_ADMIN_EMAIL?.split(",") || []
+        setIsAdmin(adminEmails.includes(user.email || ""))
+      } else {
+        setIsAdmin(false)
+      }
+
       setLoading(false)
     })
 
@@ -45,7 +57,7 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
   }, [])
 
   const signIn = async (email: string, password: string) => {
-    if (!auth) return;
+    if (!auth) return
     try {
       await signInWithEmailAndPassword(auth, email, password)
     } catch (error: any) {
@@ -54,24 +66,23 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
   }
 
   const signUp = async (email: string, password: string, displayName?: string) => {
-    if (!auth) return;
+    if (!auth) return
 
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
 
       if (displayName) {
         await updateProfile(userCredential.user, {
-          displayName: displayName
+          displayName: displayName,
         })
       }
-
     } catch (error: any) {
       throw error
     }
   }
 
   const logout = async () => {
-    if (!auth) return;
+    if (!auth) return
 
     try {
       await signOut(auth)
@@ -81,7 +92,7 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
   }
 
   const resetPassword = async (email: string) => {
-    if (!auth) return;
+    if (!auth) return
 
     try {
       await sendPasswordResetEmail(auth, email)
@@ -95,15 +106,18 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
   }
 
   return (
-    <AuthContext.Provider value={{
-      user,
-      loading,
-      isConfigured,
-      signIn,
-      signUp,
-      logout,
-      resetPassword
-    }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        isConfigured,
+        isAdmin,
+        signIn,
+        signUp,
+        logout,
+        resetPassword,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )
@@ -114,7 +128,7 @@ export const useFirebaseAuth = () => useContext(AuthContext)
 export const useAuth = () => {
   const context = useContext(AuthContext)
   if (context === undefined) {
-    throw new Error('useAuth must be used within a FirebaseAuthProvider')
+    throw new Error("useAuth must be used within a FirebaseAuthProvider")
   }
   return context
 }
