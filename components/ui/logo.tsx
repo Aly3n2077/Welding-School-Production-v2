@@ -6,7 +6,7 @@ export function Logo({ className }: { className?: string }) {
       src="/images/mroncy-logo.png"
       alt="Mroncy Welding Centre Logo"
       width={40}
-      height={40}
+      height="auto"
       className={className}
     />
   )
