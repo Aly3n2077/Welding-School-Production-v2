@@ -9,16 +9,9 @@ import AdminHeader from "@/components/admin/header"
 import FullPageLoader from "@/components/ui/full-page-loader"
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
-  const authContext = useFirebaseAuth()
+  const { user, isAdmin, loading } = useFirebaseAuth()
   const router = useRouter()
   const pathname = usePathname()
-
-  // Handle case where auth context might be undefined
-  if (!authContext) {
-    return <FullPageLoader message="Initializing authentication..." />
-  }
-
-  const { user, isAdmin, loading } = authContext
 
   useEffect(() => {
     if (!loading) {

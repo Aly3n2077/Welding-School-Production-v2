@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation"
 import { Menu, X, Phone, Mail, MapPin, Clock, ChevronDown, Award, Users, BookOpen, GraduationCap } from "lucide-react"
 import { Logo } from "@/components/ui/logo"
 import { AuthNav } from "./auth-nav"
-import { WhatsAppButton } from "../ui/whatsapp-button"
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false)

@@ -70,24 +70,21 @@
 
 @layer components {
   .btn-primary {
-    @apply px-8 py-4 bg-gradient-to-r from-welding-orange to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-xl hover:shadow-2xl inline-flex items-center justify-center transform hover:scale-105 hover:-translate-y-1 border border-white/20;
+    @apply px-8 py-4 bg-gradient-to-r from-welding-orange to-yellow-500 text-white font-bold rounded-full hover:from-orange-600 hover:to-yellow-400 transition-all duration-300 shadow-xl hover:shadow-2xl inline-flex items-center transform hover:scale-105 hover:-translate-y-1 border border-white/20;
   }
 
   .btn-secondary {
-    @apply px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-steel-blue transition-all duration-300 shadow-xl hover:shadow-2xl inline-flex items-center justify-center transform hover:scale-105 hover:-translate-y-1;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    @apply px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-steel-blue transition-all duration-300 shadow-xl hover:shadow-2xl inline-flex items-center transform hover:scale-110 hover:-translate-y-1;
   }
 
   /* Alternative secondary button for dark backgrounds */
   .btn-secondary-dark {
-    @apply px-8 py-4 bg-steel-blue/20 backdrop-blur-sm border-2 border-steel-blue text-steel-blue font-bold rounded-full hover:bg-steel-blue hover:text-white transition-all duration-300 shadow-xl hover:shadow-2xl inline-flex items-center transform hover:scale-110 hover:-translate-y-1;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    @apply px-8 py-4 bg-steel-blue/10 backdrop-blur-sm border-2 border-steel-blue text-steel-blue font-bold rounded-full hover:bg-steel-blue hover:text-white transition-all duration-300 shadow-xl hover:shadow-2xl inline-flex items-center transform hover:scale-110 hover:-translate-y-1;
   }
 
   /* White button variant for light backgrounds */
   .btn-white {
     @apply px-8 py-4 bg-white border-2 border-steel-blue text-steel-blue font-bold rounded-full hover:bg-steel-blue hover:text-white transition-all duration-300 shadow-xl hover:shadow-2xl inline-flex items-center transform hover:scale-110 hover:-translate-y-1;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
 
   /* Utility button classes for consistent styling */

@@ -1,7 +1,6 @@
 // app/auth/error/page.tsx
 "use client"
 
-import { Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -9,7 +8,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { ShieldAlert } from "lucide-react"
 
-function AuthErrorContent() {
+export default function AuthErrorPage() {
   const searchParams = useSearchParams()
   const error = searchParams.get("error")
 
@@ -78,13 +77,5 @@ function AuthErrorContent() {
         </CardContent>
       </Card>
     </div>
-  )
-}
-
-export default function AuthErrorPage() {
-  return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <AuthErrorContent />
-    </Suspense>
   )
 }

@@ -365,7 +365,7 @@ const FeaturedCourses = () => {
                     }`}
                   >
                     {/* Image Container with Improved Aspect Ratio */}
-                    <div className="relative aspect-[4/3] overflow-hidden group" style={{ minHeight: '200px' }}>
+                    <div className="relative aspect-[4/3] overflow-hidden group">
                       {/* Loading Skeleton */}
                       {!imageLoaded[index] && (
                         <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
