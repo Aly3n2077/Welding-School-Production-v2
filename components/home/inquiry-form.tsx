@@ -1,82 +1,69 @@
-The code updates the inquiry form to redirect to WhatsApp with the form data.
-```
-
-```replit_final_file
 "use client"
 
-import type React from "react"
-import { useState, useEffect } from "react"
-import { Loader2, CheckCircle, ArrowRight } from "lucide-react"
+import React, { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { MessageSquare, Loader2 } from "lucide-react"
 
-const programs = [
-  { id: "welding-business", name: "How to Start a Welding Business" },
-  { id: "welding-school", name: "How to Start a Welding Private School" },
-  { id: "business-planning", name: "Welding Business Planning and Strategy" },
-  { id: "marketing", name: "Marketing for Welding Businesses" },
-  { id: "sales", name: "Welding Sales and Customer Service" },
-  { id: "operations", name: "Welding Shop Operations and Management" },
-  { id: "financial", name: "Welding Business Financial Management" },
-  { id: "team-building", name: "Building a Welding Team and Staff Management" },
-  { id: "contracts", name: "How to Get Welding Contracts and Tenders" },
-  { id: "growth", name: "Welding Business Growth and Expansion Strategies" },
-]
+interface FormData {
+  name: string
+  email: string
+  phone: string
+  program: string
+  message: string
+}
 
-const InquiryForm = () => {
-  const [formData, setFormData] = useState({
+interface SubmitStatus {
+  success: boolean
+  message: string
+}
+
+export default function InquiryForm() {
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     phone: "",
     program: "",
     message: "",
   })
+
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<{
-    success: boolean
-    message: string
-  } | null>(null)
-  const [activeField, setActiveField] = useState<string | null>(null)
-  const [formVisible, setFormVisible] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus | null>(null)
 
-  useEffect(() => {
-    // Animate form visibility when component mounts
-    const timer = setTimeout(() => {
-      setFormVisible(true)
-    }, 300)
-
-    return () => clearTimeout(timer)
-  }, [])
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }))
   }
 
-  const handleFocus = (fieldName: string) => {
-    setActiveField(fieldName)
-  }
-
-  const handleBlur = () => {
-    setActiveField(null)
+  const handleSelectChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      program: value,
+    }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus(null)
 
     try {
       // Create WhatsApp message
-      const whatsappMessage = `*New Quick Inquiry from Mroncy Welding Website*
+      const whatsappMessage = `Hello! I'm interested in MRONCY School of Welding.
 
-*Name:* ${formData.name}
-*Email:* ${formData.email}
-*Phone:* ${formData.phone}
-*Course Interest:* ${formData.program}
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Program: ${formData.program || "General Inquiry"}
+Message: ${formData.message}
 
-*Message:*
-${formData.message}
-
----
-Sent from Mroncy Welding Quick Inquiry Form`
+Please provide more information about the courses and enrollment process.`
 
       // Encode the message for WhatsApp URL
       const encodedMessage = encodeURIComponent(whatsappMessage)
@@ -125,178 +112,140 @@ Sent from Mroncy Welding Quick Inquiry Form`
       <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-steel-blue/20 rounded-full blur-3xl"></div>
 
       <div className="container-custom relative z-10">
-        <div
-          className={`max-w-3xl mx-auto bg-white/80 backdrop-blur-md rounded-lg shadow-lg p-8 transition-all duration-1000 transform ${
-            formVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          } hover:shadow-xl border border-white/50`}
-        >
-          <h2 className="section-title text-center mb-8 animate-fade-in">Ready to Start Your Welding Career?</h2>
+        <div className="text-center mb-12">
+          <h2 className="section-title">Start Your Welding Journey</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Ready to transform your career? Send us your details and we'll get back to you with all the information you need.
+          </p>
+        </div>
 
-          {submitStatus ? (
-            <div
-              className={`p-6 mb-6 rounded-md ${
-                submitStatus.success
-                  ? "bg-green-100/80 text-green-700 border border-green-200"
-                  : "bg-red-100/80 text-red-700 border border-red-200"
-              } backdrop-blur-sm animate-fade-in flex items-center`}
-            >
-              {submitStatus.success && <CheckCircle className="mr-3 text-green-500 flex-shrink-0" size={24} />}
-              <p className="font-medium">{submitStatus.message}</p>
-            </div>
-          ) : null}
+        <div className="max-w-2xl mx-auto">
+          <Card className="shadow-2xl bg-white/95 backdrop-blur-sm border-0">
+            <CardHeader className="text-center pb-6">
+              <CardTitle className="text-2xl text-steel-blue flex items-center justify-center gap-3">
+                <MessageSquare className="w-6 h-6 text-welding-orange" />
+                Get Course Information
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name *
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Enter your full name"
+                      className="border-gray-300 focus:border-welding-orange focus:ring-welding-orange"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address *
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="Enter your email"
+                      className="border-gray-300 focus:border-welding-orange focus:ring-welding-orange"
+                    />
+                  </div>
+                </div>
 
-          <form onSubmit={handleSubmit} className="animate-fade-in">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div className={`transition-all duration-300 transform ${activeField === "name" ? "scale-105" : ""}`}>
-                <label htmlFor="name" className="block text-gray-700 font-medium mb-1 sm:mb-2 text-sm sm:text-base">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  onFocus={() => handleFocus("name")}
-                  onBlur={handleBlur}
-                  required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-welding-orange bg-white/70 backdrop-blur-sm transition-all duration-300 text-sm sm:text-base"
-                  placeholder="Your full name"
-                />
-              </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                      Phone Number *
+                    </label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="Enter your phone number"
+                      className="border-gray-300 focus:border-welding-orange focus:ring-welding-orange"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="program" className="block text-sm font-medium text-gray-700 mb-2">
+                      Program of Interest
+                    </label>
+                    <Select value={formData.program} onValueChange={handleSelectChange}>
+                      <SelectTrigger className="border-gray-300 focus:border-welding-orange focus:ring-welding-orange">
+                        <SelectValue placeholder="Select a program" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="SMAW Basic">SMAW Basic Welding</SelectItem>
+                        <SelectItem value="MIG/MAG">MIG/MAG Welding</SelectItem>
+                        <SelectItem value="TIG">TIG Welding</SelectItem>
+                        <SelectItem value="Pipe Welding">Pipe Welding</SelectItem>
+                        <SelectItem value="Structural">Structural Welding</SelectItem>
+                        <SelectItem value="Business">Welding Business</SelectItem>
+                        <SelectItem value="General">General Inquiry</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
 
-              <div className={`transition-all duration-300 transform ${activeField === "email" ? "scale-105" : ""}`}>
-                <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  onFocus={() => handleFocus("email")}
-                  onBlur={handleBlur}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-welding-orange bg-white/70 backdrop-blur-sm transition-all duration-300"
-                  placeholder="Your email address"
-                />
-              </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    Message
+                  </label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    placeholder="Tell us about your goals and any questions you have..."
+                    className="border-gray-300 focus:border-welding-orange focus:ring-welding-orange resize-none"
+                  />
+                </div>
 
-              <div className={`transition-all duration-300 transform ${activeField === "phone" ? "scale-105" : ""}`}>
-                <label htmlFor="phone" className="block text-gray-700 font-medium mb-2">
-                  Phone Number *
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  onFocus={() => handleFocus("phone")}
-                  onBlur={handleBlur}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-welding-orange bg-white/70 backdrop-blur-sm transition-all duration-300"
-                  placeholder="Your phone number"
-                />
-              </div>
+                {submitStatus && (
+                  <div className={`p-4 rounded-md ${
+                    submitStatus.success 
+                      ? "bg-green-50 text-green-700 border border-green-200" 
+                      : "bg-red-50 text-red-700 border border-red-200"
+                  }`}>
+                    {submitStatus.message}
+                  </div>
+                )}
 
-              <div className={`transition-all duration-300 transform ${activeField === "program" ? "scale-105" : ""}`}>
-                <label htmlFor="program" className="block text-gray-700 font-medium mb-1 sm:mb-2 text-sm sm:text-base">
-                  Program Interested In *
-                </label>
-                <select
-                  id="program"
-                  name="program"
-                  value={formData.program}
-                  onChange={handleChange}
-                  onFocus={() => handleFocus("program")}
-                  onBlur={handleBlur}
-                  required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-welding-orange bg-white/70 backdrop-blur-sm transition-all duration-300 text-sm sm:text-base"
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-welding-orange hover:bg-orange-600 text-white py-3 text-lg font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
-                  <option value="">Select a program</option>
-                  {programs.map((program) => (
-                    <option key={program.id} value={program.id}>
-                      {program.name}
-                    </option>
-                  ))}
-                  <option value="full-package">Full Package (All Programs)</option>
-                </select>
-              </div>
-            </div>
-
-            <div
-              className={`mb-6 transition-all duration-300 transform ${activeField === "message" ? "scale-[1.02]" : ""}`}
-            >
-              <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                onFocus={() => handleFocus("message")}
-                onBlur={handleBlur}
-                rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-welding-orange bg-white/70 backdrop-blur-sm transition-all duration-300"
-                placeholder="Tell us more about your interest"
-              ></textarea>
-            </div>
-
-            <div className="bg-steel-blue/10 backdrop-blur-sm p-6 rounded-md mb-6 border border-steel-blue/20 transition-all duration-300 hover:bg-steel-blue/15">
-              <h3 className="font-bold text-steel-blue mb-4 text-lg">Program Details:</h3>
-              <ul className="text-sm text-gray-700 grid grid-cols-1 md:grid-cols-2 gap-3">
-                <li className="flex items-center space-x-2 mb-1">
-                  <span className="w-2 h-2 rounded-full bg-welding-orange inline-block"></span>
-                  <span className="font-medium">Investment: $200</span>
-                </li>
-                <li className="flex items-center space-x-2 mb-1">
-                  <span className="w-2 h-2 rounded-full bg-welding-orange inline-block"></span>
-                  <span className="font-medium">Duration: 2 months</span>
-                </li>
-                <li className="flex items-center space-x-2 mb-1">
-                  <span className="w-2 h-2 rounded-full bg-welding-orange inline-block"></span>
-                  <span className="font-medium">Potential earnings: $3K-$4K per month</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <span className="w-2 h-2 rounded-full bg-welding-orange inline-block"></span>
-                  <span className="font-medium">Payment options: Ecocash, Cash, Mukuru</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="text-center">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="btn-primary min-w-[200px] transition-all duration-300 transform hover:scale-105 hover:shadow-lg relative overflow-hidden group py-2 sm:py-3 text-sm sm:text-base"
-              >
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-welding-orange to-welding-orange/80 group-hover:scale-110 transition-transform duration-500"></span>
-                <span className="relative flex items-center justify-center">
                   {isSubmitting ? (
                     <>
-                      <Loader2 size={18} className="mr-2 animate-spin" />
-                      Sending...
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                      Connecting to WhatsApp...
                     </>
                   ) : (
                     <>
-                      Submit Inquiry
-                      <ArrowRight
-                        size={16}
-                        className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                      />
+                      <MessageSquare className="w-5 h-5 mr-2" />
+                      Send via WhatsApp
                     </>
                   )}
-                </span>
-              </button>
-            </div>
-          </form>
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>
   )
 }
-
-export default InquiryForm
