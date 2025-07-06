@@ -1,43 +1,97 @@
-"use client" // This layout now needs to be a client component for auth checks
+import type React from "react"
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "./globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
+import { FirebaseAuthProvider } from "@/components/providers/firebase-auth-provider"
+import { Toaster } from "@/components/ui/toaster"
+import { Toaster as Sonner } from "@/components/ui/sonner"
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Suspense } from "react"
 
-import type { ReactNode } from "react"
-import { useEffect } from "react"
-import { useRouter, usePathname } from "next/navigation"
-import { useFirebaseAuth } from "@/components/providers/firebase-auth-provider"
-import AdminSidebar from "@/components/admin/sidebar"
-import AdminHeader from "@/components/admin/header"
-import FullPageLoader from "@/components/ui/full-page-loader"
+const inter = Inter({ subsets: ["latin"] })
 
-export default function AdminLayout({ children }: { children: ReactNode }) {
-  const { user, isAdmin, loading } = useFirebaseAuth()
-  const router = useRouter()
-  const pathname = usePathname()
+export const metadata: Metadata = {
+  title: {
+    default: "Meronzi Welding Centre - Professional Welding Training in Zimbabwe",
+    template: "%s | Meronzi Welding Centre",
+  },
+  description:
+    "Learn professional welding skills at Meronzi Welding Centre. Offering comprehensive welding courses including SMAW, MIG, TIG, and specialized training programs in Zimbabwe.",
+  keywords: [
+    "welding training",
+    "welding courses",
+    "SMAW welding",
+    "MIG welding",
+    "TIG welding",
+    "welding certification",
+    "Zimbabwe welding school",
+    "professional welding",
+    "welding skills",
+    "trade training",
+  ],
+  authors: [{ name: "Meronzi Welding Centre" }],
+  creator: "Meronzi Welding Centre",
+  publisher: "Meronzi Welding Centre",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://meronziwelding.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    title: "Meronzi Welding Centre - Professional Welding Training",
+    description:
+      "Learn professional welding skills at Meronzi Welding Centre. Comprehensive welding courses and certification programs in Zimbabwe.",
+    siteName: "Meronzi Welding Centre",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Meronzi Welding Centre - Professional Welding Training",
+    description:
+      "Learn professional welding skills at Meronzi Welding Centre. Comprehensive welding courses and certification programs in Zimbabwe.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "your-google-verification-code",
+  },
+}
 
-  useEffect(() => {
-    if (!loading) {
-      if (!user) {
-        router.push(`/admin/login?callbackUrl=${pathname}`)
-      } else if (!isAdmin) {
-        // If user is logged in but not an admin, redirect them away
-        alert("Access Denied: You do not have administrative privileges.")
-        router.push("/dashboard") // Or to a general access denied page
-      }
-    }
-  }, [user, isAdmin, loading, router, pathname])
-
-  if (loading || !user || !isAdmin) {
-    // Show loader while checking auth/admin status or if user is not yet available/admin (and redirect is in progress)
-    return <FullPageLoader message="Verifying admin access..." />
-  }
-
-  // User is authenticated and is an admin
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <div className="flex h-screen bg-gray-50">
-      <AdminSidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <AdminHeader firebaseUser={user} /> {/* Pass Firebase user */}
-        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4 md:p-6">{children}</main>
-      </div>
-    </div>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <FirebaseAuthProvider>
+            <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+            <Toaster />
+            <Sonner />
+          </FirebaseAuthProvider>
+        </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
   )
 }

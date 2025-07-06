@@ -10,7 +10,7 @@ import FullPageLoader from "@/components/ui/full-page-loader"
 import { useFirebaseAuth } from "@/components/providers/firebase-auth-provider"
 import Link from "next/link"
 
-export default function AdminLoginPage() {
+function AdminLoginContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get("callbackUrl") || "/admin/dashboard"
@@ -27,6 +27,11 @@ export default function AdminLoginPage() {
   }, [user, isAdmin, loading, router, callbackUrl])
 
   const handleAdminGoogleSignIn = async () => {
+    if (!auth) {
+      alert("Firebase authentication is not configured properly.")
+      return
+    }
+
     const provider = new GoogleAuthProvider()
     try {
       const result = await signInWithPopup(auth, provider)
@@ -87,4 +92,8 @@ export default function AdminLoginPage() {
       </div>
     </div>
   )
+}
+
+export default function AdminLoginPage() {
+  return <AdminLoginContent />
 }

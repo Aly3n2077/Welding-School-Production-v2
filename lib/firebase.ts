@@ -1,5 +1,6 @@
-import { initializeApp, getApps, FirebaseApp } from "firebase/app"
-import { getAuth, Auth } from "firebase/auth"
+import { initializeApp, getApps, type FirebaseApp } from "firebase/app"
+import { getAuth, type Auth } from "firebase/auth"
+import { getFirestore, type Firestore } from "firebase/firestore"
 
 // Firebase configuration interface
 interface FirebaseConfig {
@@ -28,8 +29,8 @@ function getFirebaseConfig(): FirebaseConfig | null {
     .map(([key, _]) => key)
 
   if (missingFields.length > 0) {
-    if (typeof window !== 'undefined') {
-      console.warn('Firebase configuration incomplete. Missing:', missingFields)
+    if (typeof window !== "undefined") {
+      console.warn("Firebase configuration incomplete. Missing:", missingFields)
     }
     return null
   }
@@ -60,7 +61,7 @@ export function initializeFirebase() {
       app = getApps()[0]
     }
     auth = getAuth(app)
-    //db = getFirestore(app)
+    db = getFirestore(app)
 
     console.log("Firebase initialized successfully")
     return { app, auth, db }
@@ -80,8 +81,8 @@ export function getFirebaseStatus() {
   const config = getFirebaseConfig()
   return {
     configured: config !== null,
-    app: Boolean(app),
-    auth: Boolean(auth),
-    db: Boolean(db)
+    app: Boolean(firebaseApp),
+    auth: Boolean(firebaseAuth),
+    db: Boolean(firebaseDb),
   }
 }
