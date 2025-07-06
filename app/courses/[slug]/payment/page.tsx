@@ -75,6 +75,32 @@ export default function PaymentPage({ params }: PaymentPageProps) {
     }
   }
 
+  const handlePaymentSubmit = (method: string) => {
+    // Create WhatsApp message for payment inquiry
+    const whatsappMessage = `*Course Registration Payment Inquiry*
+
+*Course:* ${course?.title}
+*Price:* $${course?.price}
+*Payment Method:* ${method}
+
+Hi, I would like to register for the above course and make payment via ${method}. Please provide payment instructions.
+
+---
+From Mroncy Welding Course Registration`
+
+    // Encode the message for WhatsApp URL
+    const encodedMessage = encodeURIComponent(whatsappMessage)
+
+    // WhatsApp admin number (with country code for Zimbabwe +263)
+    const adminWhatsApp = "263785054159"
+
+    // Create WhatsApp URL
+    const whatsappUrl = `https://wa.me/${adminWhatsApp}?text=${encodedMessage}`
+
+    // Open WhatsApp in new tab
+    window.open(whatsappUrl, '_blank')
+  }
+
   if (status === "loading") {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
@@ -214,7 +240,7 @@ export default function PaymentPage({ params }: PaymentPageProps) {
                 )}
               </CardContent>
               <CardFooter>
-                <Button onClick={handlePayment} disabled={isProcessing || isComplete || !session} className="w-full">
+                <Button onClick={() => handlePaymentSubmit(selectedMethod)} disabled={isProcessing || isComplete || !session} className="w-full">
                   {isProcessing ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />

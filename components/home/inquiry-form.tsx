@@ -1,3 +1,7 @@
+The code updates the inquiry form to redirect to WhatsApp with the form data.
+```
+
+```replit_final_file
 "use client"
 
 import type React from "react"
@@ -59,19 +63,39 @@ const InquiryForm = () => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      // Create WhatsApp message
+      const whatsappMessage = `*New Quick Inquiry from Mroncy Welding Website*
 
-    setSubmitStatus({
-      success: true,
-      message: "Thank you for your inquiry! We will contact you shortly.",
-    })
+*Name:* ${formData.name}
+*Email:* ${formData.email}
+*Phone:* ${formData.phone}
+*Course Interest:* ${formData.program}
 
-    setIsSubmitting(false)
+*Message:*
+${formData.message}
 
-    // Reset form after successful submission
-    if (true) {
-      // Replace with actual success condition
+---
+Sent from Mroncy Welding Quick Inquiry Form`
+
+      // Encode the message for WhatsApp URL
+      const encodedMessage = encodeURIComponent(whatsappMessage)
+
+      // WhatsApp admin number (with country code for Zimbabwe +263)
+      const adminWhatsApp = "263785054159"
+
+      // Create WhatsApp URL
+      const whatsappUrl = `https://wa.me/${adminWhatsApp}?text=${encodedMessage}`
+
+      // Open WhatsApp in new tab
+      window.open(whatsappUrl, '_blank')
+
+      // Simulate success (you might want to handle actual success/failure in a real scenario)
+      setSubmitStatus({
+        success: true,
+        message: "Redirecting to WhatsApp!",
+      })
+
       setFormData({
         name: "",
         email: "",
@@ -79,8 +103,15 @@ const InquiryForm = () => {
         program: "",
         message: "",
       })
+    } catch (error) {
+      setSubmitStatus({
+        success: false,
+        message: "Failed to open WhatsApp. Please try again.",
+      })
+    } finally {
+      setIsSubmitting(false)
 
-      // Clear success message after 5 seconds
+      // Clear status message after 5 seconds
       setTimeout(() => {
         setSubmitStatus(null)
       }, 5000)

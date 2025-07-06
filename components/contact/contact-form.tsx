@@ -52,6 +52,32 @@ const ContactForm = () => {
       // Simulate form submission
       await new Promise((resolve) => setTimeout(resolve, 1500))
 
+      // Create WhatsApp message
+      const whatsappMessage = `*New Inquiry from Mroncy Welding Website*
+
+*Name:* ${formData.get("name")}
+*Email:* ${formData.get("email")}
+*Phone:* ${formData.get("phone")}
+*Subject:* ${formData.get("subject")}
+
+*Message:*
+${formData.get("message")}
+
+---
+Sent from Mroncy Welding Contact Form`
+
+      // Encode the message for WhatsApp URL
+      const encodedMessage = encodeURIComponent(whatsappMessage)
+
+      // WhatsApp admin number (with country code for Zimbabwe +263)
+      const adminWhatsApp = "263785054159"
+
+      // Create WhatsApp URL
+      const whatsappUrl = `https://wa.me/${adminWhatsApp}?text=${encodedMessage}`
+
+      // Open WhatsApp in new tab
+      window.open(whatsappUrl, '_blank')
+
       setFormState({
         success: true,
         message: "Thank you for your message! We will get back to you soon.",
